@@ -54,7 +54,7 @@
             letter-spacing: 0.5px;
         }
 
-        .button-row {
+        .button-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
@@ -87,6 +87,18 @@
             box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
         }
 
+        .instrument-button.active-es {
+            background-color: #10b981;
+            border-color: #34d399;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        }
+
+        .instrument-button.active-nq {
+            background-color: #f59e0b;
+            border-color: #fbbf24;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+        }
+
         .instrument-text {
             font-size: 16px;
             font-weight: bold;
@@ -95,7 +107,9 @@
         }
 
         .instrument-button.active-mes .instrument-text,
-        .instrument-button.active-mnq .instrument-text {
+        .instrument-button.active-mnq .instrument-text,
+        .instrument-button.active-es .instrument-text,
+        .instrument-button.active-nq .instrument-text {
             color: #fff;
         }
 
@@ -107,7 +121,9 @@
         }
 
         .instrument-button.active-mes .instrument-subtext,
-        .instrument-button.active-mnq .instrument-subtext {
+        .instrument-button.active-mnq .instrument-subtext,
+        .instrument-button.active-es .instrument-subtext,
+        .instrument-button.active-nq .instrument-subtext {
             color: #e0e7ff;
         }
 
@@ -234,7 +250,7 @@
 
         <div class="card">
             <div class="label">Instrument</div>
-            <div class="button-row">
+            <div class="button-grid">
                 <div class="instrument-button active-mes" id="btn-mes" onclick="selectInstrument('MES')">
                     <div class="instrument-text">MES</div>
                     <div class="instrument-subtext">$5/pt</div>
@@ -242,6 +258,14 @@
                 <div class="instrument-button" id="btn-mnq" onclick="selectInstrument('MNQ')">
                     <div class="instrument-text">MNQ</div>
                     <div class="instrument-subtext">$2/pt</div>
+                </div>
+                <div class="instrument-button" id="btn-es" onclick="selectInstrument('ES')">
+                    <div class="instrument-text">ES</div>
+                    <div class="instrument-subtext">$50/pt</div>
+                </div>
+                <div class="instrument-button" id="btn-nq" onclick="selectInstrument('NQ')">
+                    <div class="instrument-text">NQ</div>
+                    <div class="instrument-subtext">$20/pt</div>
                 </div>
             </div>
 
@@ -288,21 +312,31 @@
 
     <script>
         let currentInstrument = 'MES';
-        const pointValues = { MES: 5, MNQ: 2 };
+        const pointValues = { 
+            MES: 5, 
+            MNQ: 2,
+            ES: 50,
+            NQ: 20
+        };
 
         function selectInstrument(instrument) {
             currentInstrument = instrument;
             
-            const btnMes = document.getElementById('btn-mes');
-            const btnMnq = document.getElementById('btn-mnq');
+            // Remove all active classes
+            document.getElementById('btn-mes').classList.remove('active-mes');
+            document.getElementById('btn-mnq').classList.remove('active-mnq');
+            document.getElementById('btn-es').classList.remove('active-es');
+            document.getElementById('btn-nq').classList.remove('active-nq');
             
-            btnMes.classList.remove('active-mes');
-            btnMnq.classList.remove('active-mnq');
-            
+            // Add active class to selected button
             if (instrument === 'MES') {
-                btnMes.classList.add('active-mes');
-            } else {
-                btnMnq.classList.add('active-mnq');
+                document.getElementById('btn-mes').classList.add('active-mes');
+            } else if (instrument === 'MNQ') {
+                document.getElementById('btn-mnq').classList.add('active-mnq');
+            } else if (instrument === 'ES') {
+                document.getElementById('btn-es').classList.add('active-es');
+            } else if (instrument === 'NQ') {
+                document.getElementById('btn-nq').classList.add('active-nq');
             }
             
             calculate();
