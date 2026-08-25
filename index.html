@@ -23,7 +23,7 @@
 
         .container {
             width: 100%;
-            max-width: 420px;
+            max-width: 440px;
         }
 
         .header {
@@ -56,14 +56,14 @@
 
         .button-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
             margin-bottom: 8px;
         }
 
         .instrument-button {
             background-color: #334155;
-            padding: 14px;
+            padding: 10px 6px;
             border-radius: 12px;
             text-align: center;
             cursor: pointer;
@@ -75,55 +75,35 @@
             background-color: #3f4d5f;
         }
 
-        .instrument-button.active-mes {
-            background-color: #3b82f6;
-            border-color: #60a5fa;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
-        }
-
-        .instrument-button.active-mnq {
-            background-color: #8b5cf6;
-            border-color: #a78bfa;
-            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
-        }
-
-        .instrument-button.active-es {
-            background-color: #10b981;
-            border-color: #34d399;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
-        }
-
-        .instrument-button.active-nq {
-            background-color: #f59e0b;
-            border-color: #fbbf24;
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
-        }
+        /* Specific instrument active colors */
+        .instrument-button.active-mes { background-color: #3b82f6; border-color: #60a5fa; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4); }
+        .instrument-button.active-mnq { background-color: #8b5cf6; border-color: #a78bfa; box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4); }
+        .instrument-button.active-es  { background-color: #10b981; border-color: #34d399; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4); }
+        .instrument-button.active-nq  { background-color: #f59e0b; border-color: #fbbf24; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4); }
+        .instrument-button.active-mgc { background-color: #eab308; border-color: #fde047; box-shadow: 0 4px 12px rgba(234, 179, 8, 0.4); }
+        .instrument-button.active-mym { background-color: #ec4899; border-color: #f472b6; box-shadow: 0 4px 12px rgba(236, 72, 153, 0.4); }
+        .instrument-button.active-mcl { background-color: #06b6d4; border-color: #67e8f9; box-shadow: 0 4px 12px rgba(6, 182, 212, 0.4); }
+        .instrument-button.active-m2k { background-color: #6366f1; border-color: #818cf8; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4); }
 
         .instrument-text {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: bold;
             color: #cbd5e1;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
 
-        .instrument-button.active-mes .instrument-text,
-        .instrument-button.active-mnq .instrument-text,
-        .instrument-button.active-es .instrument-text,
-        .instrument-button.active-nq .instrument-text {
+        .instrument-button[class*="active-"] .instrument-text {
             color: #fff;
         }
 
         .instrument-subtext {
-            font-size: 11px;
+            font-size: 10px;
             color: #94a3b8;
-            margin-top: 4px;
+            margin-top: 2px;
             font-weight: 600;
         }
 
-        .instrument-button.active-mes .instrument-subtext,
-        .instrument-button.active-mnq .instrument-subtext,
-        .instrument-button.active-es .instrument-subtext,
-        .instrument-button.active-nq .instrument-subtext {
+        .instrument-button[class*="active-"] .instrument-subtext {
             color: #e0e7ff;
         }
 
@@ -228,7 +208,11 @@
 
         @media (max-width: 480px) {
             .card {
-                padding: 20px;
+                padding: 16px;
+            }
+
+            .button-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
 
             .result-value-large {
@@ -251,21 +235,37 @@
         <div class="card">
             <div class="label">Instrument</div>
             <div class="button-grid">
-                <div class="instrument-button active-mes" id="btn-mes" onclick="selectInstrument('MES')">
+                <div class="instrument-button active-mes" id="btn-MES" onclick="selectInstrument('MES')">
                     <div class="instrument-text">MES</div>
                     <div class="instrument-subtext">$5/pt</div>
                 </div>
-                <div class="instrument-button" id="btn-mnq" onclick="selectInstrument('MNQ')">
+                <div class="instrument-button" id="btn-MNQ" onclick="selectInstrument('MNQ')">
                     <div class="instrument-text">MNQ</div>
                     <div class="instrument-subtext">$2/pt</div>
                 </div>
-                <div class="instrument-button" id="btn-es" onclick="selectInstrument('ES')">
+                <div class="instrument-button" id="btn-ES" onclick="selectInstrument('ES')">
                     <div class="instrument-text">ES</div>
                     <div class="instrument-subtext">$50/pt</div>
                 </div>
-                <div class="instrument-button" id="btn-nq" onclick="selectInstrument('NQ')">
+                <div class="instrument-button" id="btn-NQ" onclick="selectInstrument('NQ')">
                     <div class="instrument-text">NQ</div>
                     <div class="instrument-subtext">$20/pt</div>
+                </div>
+                <div class="instrument-button" id="btn-MGC" onclick="selectInstrument('MGC')">
+                    <div class="instrument-text">MGC</div>
+                    <div class="instrument-subtext">$10/pt</div>
+                </div>
+                <div class="instrument-button" id="btn-MYM" onclick="selectInstrument('MYM')">
+                    <div class="instrument-text">MYM</div>
+                    <div class="instrument-subtext">$0.5/pt</div>
+                </div>
+                <div class="instrument-button" id="btn-MCL" onclick="selectInstrument('MCL')">
+                    <div class="instrument-text">MCL</div>
+                    <div class="instrument-subtext">$10/pt</div>
+                </div>
+                <div class="instrument-button" id="btn-M2K" onclick="selectInstrument('M2K')">
+                    <div class="instrument-text">M2K</div>
+                    <div class="instrument-subtext">$5/pt</div>
                 </div>
             </div>
 
@@ -316,27 +316,25 @@
             MES: 5, 
             MNQ: 2,
             ES: 50,
-            NQ: 20
+            NQ: 20,
+            MGC: 10,
+            MYM: 0.5,
+            MCL: 10,
+            M2K: 5
         };
 
         function selectInstrument(instrument) {
             currentInstrument = instrument;
             
-            // Remove all active classes
-            document.getElementById('btn-mes').classList.remove('active-mes');
-            document.getElementById('btn-mnq').classList.remove('active-mnq');
-            document.getElementById('btn-es').classList.remove('active-es');
-            document.getElementById('btn-nq').classList.remove('active-nq');
+            // Remove active classes from all buttons dynamically
+            document.querySelectorAll('.instrument-button').forEach(btn => {
+                btn.className = 'instrument-button';
+            });
             
-            // Add active class to selected button
-            if (instrument === 'MES') {
-                document.getElementById('btn-mes').classList.add('active-mes');
-            } else if (instrument === 'MNQ') {
-                document.getElementById('btn-mnq').classList.add('active-mnq');
-            } else if (instrument === 'ES') {
-                document.getElementById('btn-es').classList.add('active-es');
-            } else if (instrument === 'NQ') {
-                document.getElementById('btn-nq').classList.add('active-nq');
+            // Add specific active class to selected button
+            const selectedBtn = document.getElementById(`btn-${instrument}`);
+            if (selectedBtn) {
+                selectedBtn.classList.add(`active-${instrument.toLowerCase()}`);
             }
             
             calculate();
